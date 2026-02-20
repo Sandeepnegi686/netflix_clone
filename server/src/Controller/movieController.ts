@@ -108,7 +108,7 @@ async function removeFavoriteMovie(
       },
       { new: true },
     );
-    console.log(updatedUser);
+    // console.log(updatedUser);
     return res
       .status(200)
       .json({ s: true, m: "Movie Removed", d: updatedUser });
