@@ -11,7 +11,6 @@ export const useModel = create<ModelStoreInterface>((set) => ({
   movieId: undefined,
   isOpen: false,
   openModel: (movieId: string) => {
-    console.log(movieId);
     set({ isOpen: true, movieId });
   },
   closeModel: () => set({ isOpen: false, movieId: undefined }),

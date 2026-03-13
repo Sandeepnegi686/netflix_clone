@@ -15,7 +15,6 @@ interface InfoModelProps {
 
 export default function InfoModel({ visible }: InfoModelProps) {
   const { closeModel, movieId } = useInfoModel();
-  const { movie } = useGetMovieById(movieId);
 
   const handleCose = useCallback(
     function () {
@@ -25,6 +24,7 @@ export default function InfoModel({ visible }: InfoModelProps) {
     },
     [closeModel],
   );
+  const { movie } = useGetMovieById(movieId);
 
   if (!visible) {
     return;
