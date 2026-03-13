@@ -1,13 +1,11 @@
-import { useCallback } from "react";
-
+import { useCallback, useEffect, useState } from "react";
 import useInfoModel from "@/hooks/useInfoModel";
-
 import PlayButton from "./PlayButton";
 import FavoriteButton from "./FavoriteButton";
 
 import { AiOutlineClose } from "react-icons/ai";
 import styles from "@/styles/InfoModel.module.css";
-import { useGetMovieById } from "@/hooks/getMovie";
+import API_BASE_URL from "@/lib/api";
 
 interface InfoModelProps {
   visible?: boolean;
@@ -15,6 +13,7 @@ interface InfoModelProps {
 
 export default function InfoModel({ visible }: InfoModelProps) {
   const { closeModel, movieId } = useInfoModel();
+  const [movie, setMovie] = useState({});
 
   const handleCose = useCallback(
     function () {
@@ -24,11 +23,26 @@ export default function InfoModel({ visible }: InfoModelProps) {
     },
     [closeModel],
   );
-  const { movie } = useGetMovieById(movieId);
+  // const { movie } = useGetMovieById(movieId);
+
+  async function fetchMovie(movieId: string) {
+    if (!movieId) return {};
+    const response = await fetch(
+      `${API_BASE_URL}/api/v1/movies/getMovieById/${movieId}`,
+    );
+    const data = await response.json();
+    return data.d;
+  }
+
+  useEffect(function () {
+    const movie = fetchMovie(movieId!);
+    setMovie(movie);
+  }, []);
 
   if (!visible) {
     return;
   }
+
   return (
     <div
       className={`${styles.infoModel} z-50 transition duration-300 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0`}
