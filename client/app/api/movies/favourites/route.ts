@@ -21,3 +21,43 @@ export async function GET() {
   const data = await response.json();
   return Response.json(data.d);
 }
+
+export async function POST(req: Request) {
+  const cookieStore = cookies();
+  const token = (await cookieStore).get("access-token");
+  const body = await req.json();
+  const res = await fetch(`${API_BASE_URL}/api/v1/movies/addFavoriteMovie`, {
+    body: JSON.stringify(body),
+    cache: "no-store",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `access-token=${token?.value}`,
+    },
+  });
+  if (!res.ok) {
+    return Response.json(null, { status: res.status });
+  }
+  const data = await res.json();
+  return Response.json(data, { status: res.status });
+}
+
+export async function DELETE(req: Request) {
+  const cookieStore = cookies();
+  const token = (await cookieStore).get("access-token");
+  const body = await req.json();
+  const res = await fetch(`${API_BASE_URL}/api/v1/movies/removeFavoriteMovie`, {
+    body: JSON.stringify(body),
+    cache: "no-store",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `access-token=${token?.value}`,
+    },
+  });
+  if (!res.ok) {
+    return Response.json(null, { status: res.status });
+  }
+  const data = await res.json();
+  return Response.json(data, { status: res.status });
+}

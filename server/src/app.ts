@@ -12,10 +12,9 @@ import authenticateUser from "./middleware/authMiddleware";
 const app: Express = express();
 const DB = process.env.DB_URL || "";
 const PORT = process.env.PORT || 0;
-const CLIENT_URL = process.env.CLIENT_URL || "";
 
 app.use(express.json());
-app.use(cors({ origin: CLIENT_URL, credentials: true }));
+app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
 app.use(cookieParser());
 
 app.get("/", (_: Request, res: Response) => res.send("hello from Ts - node"));

@@ -42,8 +42,11 @@ async function signUp(req: Request<{}, {}, SignUpType, {}>, res: Response) {
     });
 
     res.cookie("access-token", token, {
-      maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000,
+      path: "/",
     });
 
     return res.status(201).json({
@@ -94,9 +97,11 @@ async function loginUser(req: Request<{}, {}, LoginType, {}>, res: Response) {
     });
 
     res.cookie("access-token", token, {
-      maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
-      // sameSite: "lax",
+      secure: true,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000,
+      path: "/",
     });
     return res.status(200).json({
       s: true,

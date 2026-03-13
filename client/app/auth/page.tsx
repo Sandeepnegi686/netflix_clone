@@ -2,8 +2,6 @@
 import Image from "next/image";
 import Input from "@/app/_components/Input";
 import { useCallback, useState } from "react";
-
-import { useAppContext } from "@/context/appContext";
 import { useRouter } from "next/navigation";
 
 import { FcGoogle } from "react-icons/fc";
@@ -24,19 +22,33 @@ export default function Page() {
     );
   }, []);
 
-  const { login, user, signIn } = useAppContext();
-
-  function handleSubmit() {
+  async function handleSubmit() {
     if (varient === "login") {
       if (!email || !password) {
         return;
       }
-      login(email, password);
+      const res = await fetch("/api/user/login", {
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.s) {
+        router.push("/");
+      }
     } else {
       if (!email || !password || !name) {
         return;
       }
-      signIn(name, email, password);
+      const res = await fetch("/api/user/signin", {
+        credentials: "include",
+        body: JSON.stringify({ email, password, name }),
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.s) {
+        router.push("/");
+      }
     }
   }
 

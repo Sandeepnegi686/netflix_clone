@@ -7,15 +7,15 @@ import FavoriteButton from "./FavoriteButton";
 
 import { AiOutlineClose } from "react-icons/ai";
 import styles from "@/styles/InfoModel.module.css";
-import { useRandomMovie } from "@/hooks/getRandomMovies";
+import { useGetMovieById } from "@/hooks/getMovie";
 
 interface InfoModelProps {
   visible?: boolean;
 }
 
 export default function InfoModel({ visible }: InfoModelProps) {
-  const { movie } = useRandomMovie();
-  const { closeModel } = useInfoModel();
+  const { closeModel, movieId } = useInfoModel();
+  const { movie } = useGetMovieById(movieId);
 
   const handleCose = useCallback(
     function () {

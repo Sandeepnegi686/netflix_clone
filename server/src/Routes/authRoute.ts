@@ -3,6 +3,7 @@ import { loginUser, signOut, signUp } from "../Controller/authController";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import authenticateUser from "../middleware/authMiddleware";
+import UserModel from "../Model/UserModel";
 
 const router = express.Router();
 const CLIENT_URL = process.env.CLIENT_URL || "";
@@ -38,8 +39,11 @@ router.get(
     return res.redirect(`${CLIENT_URL}/auth-successfull`);
   },
 );
-router.get("/me", authenticateUser, (req: Request, res: Response) => {
-  return res.status(200).json({ s: true, d: req.user });
+
+router.get("/me", authenticateUser, async (req: Request, res: Response) => {
+  const userId = (req.user as { _id: string })._id;
+  const user = await UserModel.findById(userId);
+  return res.status(200).json({ s: true, d: user });
 });
 
 export default router;

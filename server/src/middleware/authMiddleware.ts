@@ -1,7 +1,22 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import AuthPayload from "../types/PayloadType";
-const JWT_SECRET = process.env.JWT_SECRET || "";
+import AuthPayload from "../Types/PayloadType";
+
+const JWT_SECRET = process.env.JWT_SECRET as string;
+
+// declare global {
+//   namespace Express {
+//     interface Request {
+//       user?: User;
+//     }
+//   }
+// }
+
+// export interface User {
+//   _id: string;
+//   name: string;
+//   email: string;
+// }
 
 function authenticateUser(req: Request, res: Response, next: NextFunction) {
   try {

@@ -1,15 +1,14 @@
-import { useAppContext } from "@/context/appContext";
 import { useFavorites } from "@/hooks/useFavorites";
 import { MovieType } from "@/types/MovieType";
 import { useMemo } from "react";
 import { AiOutlineCheck, AiOutlinePlus } from "react-icons/ai";
+import { mutate } from "swr";
 
 interface FavoriteButtonProps {
   favoriteIds: string;
 }
 
 export default function FavoriteButton({ favoriteIds }: FavoriteButtonProps) {
-  const { addFavroiteMovie, removeFavroiteMovie } = useAppContext();
   const { favoriteMovies } = useFavorites();
 
   const isFavroite = useMemo(
@@ -21,11 +20,21 @@ export default function FavoriteButton({ favoriteIds }: FavoriteButtonProps) {
     [favoriteIds, favoriteMovies],
   );
 
-  function handleAddRemoveFav() {
+  async function handleAddRemoveFav() {
     if (isFavroite) {
-      removeFavroiteMovie(favoriteIds);
+      await fetch("/api/movies/favourites", {
+        credentials: "include",
+        method: "DELETE",
+        body: JSON.stringify({ favoriteMovieId: favoriteIds }),
+      });
+      mutate("/api/movies/favourites");
     } else {
-      addFavroiteMovie(favoriteIds);
+      await fetch("/api/movies/favourites", {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({ favoriteMovieId: favoriteIds }),
+      });
+      mutate("/api/movies/favourites");
     }
   }
 

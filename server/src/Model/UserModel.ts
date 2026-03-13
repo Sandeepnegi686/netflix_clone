@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import UserType from "../types/UserType";
+// import UserType from "../types/UserType";
 
-const Schema = new mongoose.Schema<UserType>(
+const Schema = new mongoose.Schema(
   {
     name: { type: String },
     image: { type: String },
@@ -13,4 +13,4 @@ const Schema = new mongoose.Schema<UserType>(
   { timestamps: true },
 );
 
-export default mongoose.model<UserType>("User", Schema);
+export default mongoose.model("User", Schema);
