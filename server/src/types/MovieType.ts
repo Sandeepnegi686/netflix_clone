@@ -6,5 +6,6 @@ export default interface MovieType extends Document {
   videoUrl: string;
   thumbnailUrl: string;
   genre: string;
+
   duration: string;
 }
