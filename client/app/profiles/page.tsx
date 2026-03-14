@@ -1,11 +1,11 @@
 "use client";
-import { useAppContext } from "@/context/appContext";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
   const router = useRouter();
-  const { user } = useAppContext();
+  const { currentUser } = useCurrentUser();
   return (
     <div className="flex items-center justify-center bg-black opacity-90 w-full h-dvh">
       <div className="flex flex-col">
@@ -19,7 +19,7 @@ export default function Page() {
               <Image src="/blue_logo.jpg" alt="logo" fill objectFit="cover" />
             </div>
             <div className="mt-1 md:mt-2 text-gray-400 text-sm md:text-xl text-center group-hover:text-white">
-              {user?.name}
+              {currentUser?.name}
             </div>
           </div>
         </div>

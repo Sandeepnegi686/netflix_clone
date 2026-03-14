@@ -1,7 +1,6 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import UserModel from "../Model/UserModel";
 import passport from "passport";
-import { Express } from "express";
 
 passport.use(
   new GoogleStrategy(

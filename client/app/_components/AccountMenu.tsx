@@ -1,5 +1,5 @@
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import API_BASE_URL from "@/lib/api";
-
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -9,6 +9,7 @@ interface AccountMenuProps {
 
 export default function AccountMenu({ visible }: AccountMenuProps) {
   const router = useRouter();
+  const { currentUser } = useCurrentUser();
   if (!visible) return;
 
   async function handleSignOut() {
@@ -38,7 +39,7 @@ export default function AccountMenu({ visible }: AccountMenuProps) {
             />
           </div>
           <p className="text-white text-sm group-hover/item:underline">
-            username
+            {currentUser?.name || "username"}
           </p>
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />

@@ -11,9 +11,10 @@ export function useCurrentUser() {
       revalidateOnReconnect: false,
     },
   );
+  // console.log(data, error);
 
   return {
-    currentUser: data.d || {},
+    currentUser: data?.d || {},
     isLoading,
     error,
     mutate,
