@@ -10,7 +10,7 @@ import moviesRouter from "./Routes/moviesRoutes";
 
 const app: Express = express();
 const DB = process.env.DB_URL || "";
-const PORT = process.env.PORT || 0;
+const PORT = process.env.PORT || 80;
 
 app.use(express.json());
 app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));

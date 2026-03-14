@@ -3,7 +3,7 @@ import { fetcher } from "@/lib/fetcher";
 
 export function useGetMovieById(movieId?: string) {
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/movies/getMovie/${movieId ?? ""}`,
+    `/api/movies/getMovie/${movieId ?? null}`,
     fetcher,
     {
       revalidateIfStale: false,

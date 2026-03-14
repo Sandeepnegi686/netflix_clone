@@ -33,8 +33,11 @@ router.get(
       expiresIn: 60 * 60 * 24, // 1 day
     });
     res.cookie("access-token", token, {
-      maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000,
+      path: "/",
     });
     return res.redirect(`${CLIENT_URL}/auth-successfull`);
   },
