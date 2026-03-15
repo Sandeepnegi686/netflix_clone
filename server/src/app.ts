@@ -1,5 +1,4 @@
 import express, { Express, Request, Response } from "express";
-import { connect } from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 require("dotenv").config();
@@ -30,12 +29,20 @@ app.get("/", (_: Request, res: Response) => res.send("hello from Ts - node"));
 app.use("/api/v1/auth/", authRouter);
 app.use("/api/v1/movies/", moviesRouter);
 
-app.listen(PORT, () => {
-  console.log("Server started at port :", PORT);
-  dbConnect(DB)
-    .then(() => console.log("Database Connected."))
-    .catch((e) => {
-      console.log(e);
-      process.exit(1);
+async function startServer() {
+  try {
+    await dbConnect(DB)
+      .then(() => console.log("Database Connected."))
+      .catch((e) => {
+        console.log(e);
+      });
+    app.listen(PORT, () => {
+      console.log("Server started at port :", PORT);
     });
-});
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+}
+
+startServer();
