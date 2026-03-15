@@ -122,7 +122,14 @@ async function loginUser(req: Request<{}, {}, LoginType, {}>, res: Response) {
 }
 
 async function signOut(req: Request, res: Response) {
-  res.clearCookie("access-token");
+  res.cookie("access-token", "", {
+    expires: new Date(0),
+    maxAge: 0,
+    httpOnly: true,
+    secure: true,
+    sameSite: "none" as const,
+    path: "/",
+  });
   return res.json({ s: true, m: "logged out" });
 }
 

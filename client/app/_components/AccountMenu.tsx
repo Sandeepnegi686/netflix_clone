@@ -1,5 +1,4 @@
 import { useCurrentUser } from "@/hooks/useCurrentUser";
-import API_BASE_URL from "@/lib/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -13,8 +12,9 @@ export default function AccountMenu({ visible }: AccountMenuProps) {
   if (!visible) return;
 
   async function handleSignOut() {
-    const response = await fetch(`${API_BASE_URL}/api/v1/auth/logout`, {
+    const response = await fetch(`/api/user/logout`, {
       credentials: "include",
+      method: "GET",
     });
     if (!response.ok) {
       throw new Error(`HTTP error. Status code:  ${response.status}`);
