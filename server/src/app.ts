@@ -1,10 +1,11 @@
 import express, { Express, Request, Response } from "express";
 import { connect } from "mongoose";
-require("dotenv").config();
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import "./config/passport";
+require("dotenv").config();
 
+import "./config/passport";
+import dbConnect from "./lib/dbConnect";
 import authRouter from "./Routes/authRoute";
 import moviesRouter from "./Routes/moviesRoutes";
 
@@ -23,7 +24,7 @@ app.use("/api/v1/movies/", moviesRouter);
 
 app.listen(PORT, () => {
   console.log("Server started at port :", PORT);
-  connect(DB)
+  dbConnect(DB)
     .then(() => console.log("Database Connected."))
     .catch((e) => {
       console.log(e);
