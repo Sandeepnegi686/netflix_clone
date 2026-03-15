@@ -14,7 +14,15 @@ const DB = process.env.DB_URL || "";
 const PORT = process.env.PORT || 80;
 
 app.use(express.json());
-app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://netflix-clone-chi-six-61.vercel.app",
+    ],
+    credentials: true,
+  }),
+);
 app.use(cookieParser());
 
 app.get("/", (_: Request, res: Response) => res.send("hello from Ts - node"));
