@@ -12,7 +12,7 @@ import authenticateUser from "../middleware/authMiddleware";
 const router: Router = express.Router();
 
 router.get("/getRandomMovie", authenticateUser, getRandomMovie);
-router.get("/getAllMovies", authenticateUser, getAllMovies);
+router.get("/getAllMovies", getAllMovies);
 router.get("/getFavMovieByUser", authenticateUser, getFavMovieByUser);
 router.post("/addFavoriteMovie", authenticateUser, addFavoriteMovie);
 router.post("/removeFavoriteMovie", authenticateUser, removeFavoriteMovie);
