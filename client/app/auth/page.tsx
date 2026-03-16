@@ -34,7 +34,6 @@ export default function Page() {
         method: "POST",
       });
       const data = await res.json();
-      console.log(data);
       if (data.s) {
         router.push("/");
         toast.success("Logged In");
