@@ -32,14 +32,9 @@ router.get(
     const token = jwt.sign(data, JWT_SECRET, {
       expiresIn: 60 * 60 * 24, // 1 day
     });
-    res.cookie("access-token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
-      path: "/",
-    });
-    return res.redirect(`${CLIENT_URL}/auth-successfull`);
+    const url = `${CLIENT_URL}/auth-successfull?access-token=${token}`;
+    console.log(url);
+    return res.redirect(url);
   },
 );
 
@@ -48,5 +43,21 @@ router.get("/me", authenticateUser, async (req: Request, res: Response) => {
   const user = await UserModel.findById(userId);
   return res.status(200).json({ s: true, d: user });
 });
+
+router.post(
+  "/me",
+  async (req: Request<{}, {}, { token: string }>, res: Response) => {
+    const token = req.body.token;
+    console.log(token);
+    res.cookie("access-token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000,
+      path: "/",
+    });
+    return res.status(200).json({ success: true });
+  },
+);
 
 export default router;

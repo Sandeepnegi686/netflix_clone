@@ -20,3 +20,27 @@ export async function GET() {
     status: response.status,
   });
 }
+
+export async function POST(req: Request) {
+  const body = await req.json();
+  const response = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    return Response.json(null, { status: response.status });
+  }
+  const data = await response.json();
+  const cookie = response.headers.get("Set-Cookie");
+  return Response.json(data, {
+    status: response.status,
+    headers: {
+      "Set-Cookie": cookie || "",
+      "Content-Type": "application/json",
+    },
+  });
+}
