@@ -10,10 +10,10 @@ export async function POST(req: Request) {
     },
     cache: "no-store",
   });
-  if (!response.ok) {
-    return Response.json(null, { status: response.status });
-  }
   const data = await response.json();
+  if (!response.ok) {
+    return Response.json(data, { status: response.status });
+  }
   const cookie = response.headers.get("set-cookie");
   return Response.json(data, {
     status: response.status,

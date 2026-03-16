@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { FcGoogle } from "react-icons/fc";
 import API_BASE_URL from "@/lib/api";
+import toast from "react-hot-toast";
 
 type varientType = "login" | "register";
 
@@ -33,8 +34,12 @@ export default function Page() {
         method: "POST",
       });
       const data = await res.json();
+      console.log(data);
       if (data.s) {
         router.push("/");
+        toast.success("Logged In");
+      } else {
+        toast.error(data.m);
       }
     } else {
       if (!email || !password || !name) {
@@ -48,6 +53,9 @@ export default function Page() {
       const data = await res.json();
       if (data.s) {
         router.push("/");
+        toast.success("Logged In");
+      } else {
+        toast.error(data.m);
       }
     }
   }

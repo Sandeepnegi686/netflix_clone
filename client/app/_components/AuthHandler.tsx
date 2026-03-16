@@ -2,6 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export default function AuthHandler() {
   const router = useRouter();
@@ -21,6 +22,7 @@ export default function AuthHandler() {
       },
     }).then(() => {
       router.push("/profiles");
+      toast.success("Login Successfull");
     });
   }, [params, router]);
   return <div></div>;

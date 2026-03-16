@@ -33,7 +33,6 @@ router.get(
       expiresIn: 60 * 60 * 24, // 1 day
     });
     const url = `${CLIENT_URL}/auth-successfull?access-token=${token}`;
-    console.log(url);
     return res.redirect(url);
   },
 );
@@ -48,7 +47,6 @@ router.post(
   "/me",
   async (req: Request<{}, {}, { token: string }>, res: Response) => {
     const token = req.body.token;
-    console.log(token);
     res.cookie("access-token", token, {
       httpOnly: true,
       secure: true,
