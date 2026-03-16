@@ -3,7 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 require("dotenv").config();
 
-import "./config/passport";
+import passport from "./config/passport";
 import dbConnect from "./lib/dbConnect";
 import authRouter from "./Routes/authRoute";
 import moviesRouter from "./Routes/moviesRoutes";
@@ -23,6 +23,7 @@ app.use(
   }),
 );
 app.use(cookieParser());
+app.use(passport.initialize());
 
 app.get("/", (_: Request, res: Response) => res.send("hello from Ts - node"));
 

@@ -105,7 +105,7 @@ export default function Page() {
           <div className="flex justify-center items-center mt-8">
             <div
               className="flex justify-center items-center rounded-full py-1 px-2 pr-3 bg-white hover:bg-gray-200 transition cursor-pointer"
-              onClick={() => router.push("/api/user/google")}
+              onClick={() => router.push(`${API_BASE_URL}/api/v1/auth/google`)}
             >
               <button className="flex justify-center items-center w-10 h-10 rounded-full">
                 <FcGoogle size={30} />
