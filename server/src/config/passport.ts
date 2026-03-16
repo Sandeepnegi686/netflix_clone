@@ -7,7 +7,10 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      callbackURL: "/api/v1/auth/google/callback",
+      callbackURL:
+        process.env.NODE_ENV === "production"
+          ? "https://netflix-clone-server-six.vercel.app/api/v1/auth/google/callback"
+          : "http://localhost:5500/api/v1/auth/google/callback",
     },
     async (_, __, profile, cb) => {
       const email = profile.emails ? profile.emails?.[0].value : "";
