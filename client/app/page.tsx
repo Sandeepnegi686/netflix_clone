@@ -7,7 +7,6 @@ import { useFavorites } from "@/hooks/useFavorites";
 import useInfoModel from "@/hooks/useInfoModel";
 import MovieList from "./_components/MovieList";
 import InfoModel from "./_components/InfoModel";
-import { useEffect } from "react";
 
 export default function Page() {
   const { allMovies } = useGetAllMovies();
