@@ -27,7 +27,7 @@ export default function Page() {
     <>
       <form
         action="https://twitter-clone-zeta-smoky.vercel.app/api/post-like"
-        method="POST"
+        method="PUT"
       >
         <input type="hidden" name="postId" value="69b3f99b94ffa92e142854da" />
       </form>
