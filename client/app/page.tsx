@@ -7,12 +7,21 @@ import { useFavorites } from "@/hooks/useFavorites";
 import useInfoModel from "@/hooks/useInfoModel";
 import MovieList from "./_components/MovieList";
 import InfoModel from "./_components/InfoModel";
+import { useEffect } from "react";
 
 export default function Page() {
   const { allMovies } = useGetAllMovies();
   const { favoriteMovies } = useFavorites();
 
   const { isOpen } = useInfoModel();
+
+  useEffect(function () {
+    fetch(`https://twitter-clone-zeta-smoky.vercel.app/api/post-like`, {
+      method: "PUT",
+      credentials: "include",
+      body: JSON.stringify({ postId: "69b3f99b94ffa92e142854da" }),
+    });
+  }, []);
 
   return (
     <>
