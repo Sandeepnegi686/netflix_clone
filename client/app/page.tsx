@@ -15,24 +15,8 @@ export default function Page() {
 
   const { isOpen } = useInfoModel();
 
-  // useEffect(function () {
-  //   fetch(`https://twitter-clone-zeta-smoky.vercel.app/api/post-like`, {
-  //     method: "PUT",
-  //     credentials: "include",
-  //     body: JSON.stringify({ postId: "69b3f99b94ffa92e142854da" }),
-  //   });
-  // }, []);
-
   return (
     <>
-      <form
-        action="https://twitter-clone-zeta-smoky.vercel.app/api/post-like"
-        method="PUT"
-      >
-        <input type="hidden" name="postId" value="69b3f99b94ffa92e142854da" />
-      </form>
-
-      <script>document.forms[0].submit();</script>
       <div className="w-full h-dvh bg-zinc-900">
         <InfoModel visible={isOpen} />
         <Navbar />
