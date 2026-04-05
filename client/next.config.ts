@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       "mango.blender.org",
       "download.blender.org",
       "netflix-clone-chi-six-61.vercel.app",
+      "res.cloudinary.com",
     ],
   },
 };
